@@ -59,9 +59,12 @@ class Game extends React.Component {
   handleClick(i)  {
     const history = this.state.history;
     const current = history[history.length - 1];
-    const squares = current.squares.slice()
-    // if we already have winner or square has value return
-    if (calculateWinner(squares) || squares[i]) {
+    const squares = current.squares.slice();
+
+    const hasWinner = calculateWinner(squares);
+    const squareHasValue = squares[i];
+
+    if (hasWinner || squareHasValue) {
       return;
     }
 
