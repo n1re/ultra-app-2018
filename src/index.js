@@ -62,11 +62,10 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const squares = current.squares.slice();
 
-    //TODO : rename
-    const hasWinner = calculateWinner(squares);
-    const squareHasValue = squares[i];
+    const winner = calculateWinner(squares);
+    const square = squares[i];
 
-    if (hasWinner || squareHasValue) {
+    if (winner || square) {
       return;
     }
 
