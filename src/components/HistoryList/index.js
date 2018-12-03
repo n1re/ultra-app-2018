@@ -6,8 +6,12 @@ function HistoryList(props) {
     const desc = move ?
         `Got to move #${move}` :
         'Go to game start';
+    
+    const {col, row} = step.position;
+
     return (
       <li key={move}>
+        <span>{`Column: ${col}, Row: ${row}`}</span> <br></br> 
         <button onClick={() => props.jumpTo(move)}>{desc}</button>
       </li>
     );
