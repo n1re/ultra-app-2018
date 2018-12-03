@@ -63,12 +63,10 @@ class Game extends React.Component {
 
     return (
       <div className="game">
-        <div className="game-board">
-          <Board
-            squares={current.squares}
-            onClick={(i, position) => this.handleClick(i, position)}
-          />
-        </div>
+        <Board
+          squares={current.squares}
+          onClick={(i, position) => this.handleClick(i, position)}
+        />
         <div className="game-info">
           <div>{status}</div>
           <button onClick={() => this.jumpTo(0)}>Go to game start</button>

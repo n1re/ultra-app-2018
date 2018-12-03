@@ -14,7 +14,7 @@ class Board extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="game-board">
         <div className="board-row">
           {this.renderSquare(0, 1, 1)}
           {this.renderSquare(1, 1, 2)}
