@@ -13,7 +13,7 @@ function HistoryList({steps, jumpTo}) {
 
   const formButton = (index) => {
     const step = ++index;
-    const innerText = `Go to step #${step}`;
+    const innerText = `Go to step`;
 
     return (
       <button onClick={() => jumpTo(step)}>
