@@ -1,25 +1,41 @@
 import React from 'react';
+import './style.css';
 
-function HistoryList(props) {
-  
-  const moves = props.history.map((step, move) => {
-    const desc = move ?
-        `Got to move #${move}` :
-        'Go to game start';
-    
-    const {col, row} = step.position;
+function HistoryList({steps, jumpTo}) {
+
+  const formPosition = ({column, row}) => {
+    if (column === 0) return;
 
     return (
-      <li key={move}>
-        <span>{`Column: ${col}, Row: ${row}`}</span> <br></br> 
-        <button onClick={() => props.jumpTo(move)}>{desc}</button>
+      <span>{`Column: ${column}, Row: ${row}`}<br></br></span>
+    );
+  }
+
+  const formButton = (index) => {
+    const step = ++index;
+    const innerText = `Got to step #${step}`;
+
+    return (
+      <button onClick={() => jumpTo(step)}>
+        {innerText}
+      </button>
+    );
+  }
+
+  const realSteps = steps.slice(1, ++steps.length);
+  
+  const listItems = realSteps.map(({ position }, index) => {
+    return (
+      <li key={index}>
+        {formPosition(position)}
+        {formButton(index)}
       </li>
     );
   });
 
   return (
     <ol>
-      {moves}
+      {listItems}
     </ol>
   );
 }

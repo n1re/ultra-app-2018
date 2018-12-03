@@ -3,11 +3,11 @@ import Square from '../Square';
 import './style.css';
 
 class Board extends React.Component {
-  renderSquare(i, col, row) {
+  renderSquare(i, column, row) {
     return (
       <Square
         value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i, {col, row})}
+        onClick={() => this.props.onClick(i, {column, row})}
       />
     );
   }

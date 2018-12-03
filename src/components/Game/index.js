@@ -8,18 +8,20 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [{
-        squares: Array(9).fill(null),
-        position: {col: 0, row: 0}
-      }],
+      steps: [
+        {
+          squares: Array(9).fill(null),
+          position: {column: 0, row: 0}
+        }
+      ],
       stepNumber: 0,
       xIsNext: true
     };
   }
 
   handleClick(i, position)  {
-    const history = this.state.history.slice(0, this.state.stepNumber + 1);
-    const current = history[history.length - 1];
+    const steps = this.state.steps.slice(0, this.state.stepNumber + 1);
+    const current = steps[steps.length - 1];
     const squares = current.squares.slice();
 
     const winner = calculateWinner(squares);
@@ -31,11 +33,11 @@ class Game extends React.Component {
 
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({
-      history: history.concat([{
+      steps: steps.concat([{
         squares,
         position
       }]),
-      stepNumber: history.length,
+      stepNumber: steps.length,
       xIsNext: !this.state.xIsNext
     });
   }
@@ -48,8 +50,8 @@ class Game extends React.Component {
   }
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
+    const steps = this.state.steps;
+    const current = steps[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
 
     let status;
@@ -69,8 +71,9 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <button onClick={() => this.jumpTo(0)}>Go to game start</button>
           <HistoryList
-            history={history}
+            steps={steps}
             jumpTo={move => this.jumpTo(move)}
           />
         </div>
