@@ -32,15 +32,14 @@ class HistoryList extends React.Component {
     );
   }
 
+  listItems() {
+    return this.props.steps.map((steps, index) => this.listItem(steps, index));
+  }
+
   render() {
-    const steps = this.props.steps;
-    const realSteps = steps.slice(1, ++steps.length);
-    
-    const listItems = realSteps.map((steps, index) => this.listItem(steps, index));
-  
     return (
       <ol>
-        {listItems}
+        {this.listItems()}
       </ol>
     );
   }

@@ -71,7 +71,7 @@ class Game extends React.Component {
           <div>{status}</div>
           <button onClick={() => this.jumpTo(0)}>Go to game start</button>
           <HistoryList
-            steps={steps}
+            steps={steps.slice(1)}
             jumpTo={move => this.jumpTo(move)}
           />
         </div>
