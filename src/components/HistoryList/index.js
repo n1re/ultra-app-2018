@@ -2,6 +2,13 @@ import React from 'react';
 import './style.css';
 
 class HistoryList extends React.Component {
+  constructor(options) {
+    super(options);
+
+    this.state = {
+      reversed: false,
+    }
+  }
   turnPosition({column, row}) {
     if (column === 0) return;
 
@@ -33,14 +40,38 @@ class HistoryList extends React.Component {
   }
 
   listItems() {
-    return this.props.steps.map((steps, index) => this.listItem(steps, index));
+    const items = this.props.steps.map((steps, index) => this.listItem(steps, index));
+    
+    if (this.state.reversed) return items.reverse();
+
+    return items;
+  }
+
+  reverse() {
+    this.setState({
+      reversed: !this.state.reversed
+    })
+  }
+
+  reverseButton() {
+    return (
+      <button onClick={() => this.reverse()}>
+        Reverse list
+      </button>
+    );
   }
 
   render() {
+    const reverseButton = this.reverseButton();
+    const listItems = this.listItems();
+
     return (
-      <ol>
-        {this.listItems()}
-      </ol>
+      <div className='history-list'>
+        {reverseButton}
+        <ol reversed={this.state.reversed}>
+          {listItems}
+        </ol>
+      </div>
     );
   }
 }
