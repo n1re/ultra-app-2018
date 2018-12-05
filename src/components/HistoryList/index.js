@@ -2,37 +2,41 @@ import React from 'react';
 import './style.css';
 
 class HistoryList extends React.Component {
+  turnPosition({column, row}) {
+    if (column === 0) return;
+
+    return (
+      <span>{`Column: ${column}, Row: ${row}`}<br></br></span>
+    );
+  }
+
+  jumpButton(index) {
+    const step = ++index;
+    const innerText = 'Go to step';
+
+    return (
+      <button onClick={() => this.props.jumpTo(step)}>
+        {innerText}
+      </button>
+    );
+  }
+
+  listItem(steps, index) {
+    const position = steps.position;
+
+    return (
+      <li key={index}>
+        {this.turnPosition(position)}
+        {this.jumpButton(index)}
+      </li>
+    );
+  }
+
   render() {
-    const formPosition = ({column, row}) => {
-      if (column === 0) return;
-  
-      return (
-        <span>{`Column: ${column}, Row: ${row}`}<br></br></span>
-      );
-    }
-  
-    const formButton = (index) => {
-      const step = ++index;
-      const innerText = `Go to step`;
-  
-      return (
-        <button onClick={() => this.props.jumpTo(step)}>
-          {innerText}
-        </button>
-      );
-    }
-    
     const steps = this.props.steps;
     const realSteps = steps.slice(1, ++steps.length);
     
-    const listItems = realSteps.map(({ position }, index) => {
-      return (
-        <li key={index}>
-          {formPosition(position)}
-          {formButton(index)}
-        </li>
-      );
-    });
+    const listItems = realSteps.map((steps, index) => this.listItem(steps, index));
   
     return (
       <ol>
