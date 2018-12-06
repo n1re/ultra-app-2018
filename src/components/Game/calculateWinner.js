@@ -10,13 +10,19 @@ function calculateWinner(squares) {
     [6, 4, 2],
   ];
 
+  const result = {
+    winner: null,
+    path: null
+  }
+
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      result.winner = squares[a];
+      result.path = lines[i];
     }
   }
-  return null;
+  return result;
 }
 
 export default calculateWinner;

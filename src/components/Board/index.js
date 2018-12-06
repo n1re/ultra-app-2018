@@ -4,11 +4,18 @@ import './style.css';
 
 class Board extends React.Component {
   renderSquare(i, column, row) {
+    let won = false;
+
+    if (this.props.won && this.props.won.includes(i)) {
+      won = true;
+    }
+
     return (
       <Square
         key={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i, {column, row})}
+        won={won}
       />
     );
   }

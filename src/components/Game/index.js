@@ -24,7 +24,7 @@ class Game extends React.Component {
     const current = steps[steps.length - 1];
     const squares = current.squares.slice();
 
-    const winner = calculateWinner(squares);
+    const { winner } = calculateWinner(squares);
     const square = squares[i];
 
     if (winner || square) {
@@ -52,7 +52,7 @@ class Game extends React.Component {
   render() {
     const steps = this.state.steps;
     const current = steps[this.state.stepNumber];
-    const winner = calculateWinner(current.squares);
+    const { winner, path } = calculateWinner(current.squares);
 
     let status;
     if (winner) {
@@ -64,6 +64,7 @@ class Game extends React.Component {
     return (
       <div className="game">
         <Board
+          won={path || null}
           squares={current.squares}
           onClick={(i, position) => this.handleClick(i, position)}
         />
