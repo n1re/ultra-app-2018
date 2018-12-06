@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 function Square(props) {
-  const wonWithClass = props.won ? ' won-with' : null;
+  const wonWithClass = props.won ? ' won-with' : '';
 
   return (
     <button
